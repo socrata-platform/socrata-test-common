@@ -3,7 +3,7 @@ package mocks
 
 import scala.collection.JavaConverters._
 
-import java.nio.charset.Charset
+import java.nio.charset.{Charset, StandardCharsets}
 import javax.servlet.ServletOutputStream
 import javax.servlet.http.HttpServletResponse
 
@@ -43,7 +43,7 @@ class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletRe
     setHeader("Content-Type", contentType)
   }
 
-  var headers = Map.empty[String, List[String]]
+  private var headers = Map.empty[String, List[String]]
   def addHeader(key: String, value: String): Unit = mutate {
     val values = value +: headers(key)
     headers = headers + (key -> values)
@@ -64,20 +64,20 @@ class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletRe
   def getHeaderNames(): java.util.Collection[String] = headers.asJava.keySet
   def getHeaders(key: String): java.util.Collection[String] = headers(key).asJava
 
-  var locale: java.util.Locale = java.util.Locale.getDefault()
+  private var locale: java.util.Locale = java.util.Locale.getDefault()
   def getLocale(): java.util.Locale = locale
   def setLocale(locale: java.util.Locale): Unit = mutate {
     this.locale = locale
   }
 
-  var charset = Charset.defaultCharset().name
+  private var charset = StandardCharsets.UTF_8.name
   def setCharacterEncoding(charset: String): Unit = mutate {
     this.charset = charset
   }
 
   def getCharacterEncoding(): String = charset
 
-  var contentLength: Long = Unused
+  private var contentLength: Long = Unused
   def setContentLength(len: Int): Unit = mutate {
     contentLength = len
   }

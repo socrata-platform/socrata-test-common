@@ -89,7 +89,7 @@ object UnusedSugarCommon extends UnusedSugarCommon {
   type UnusedValue = UnusedSugarSimple.UnusedValue
 
   private object EmptyResponse extends Response {
-    def charset: java.nio.charset.Charset = java.nio.charset.Charset.defaultCharset()
+    def charset: java.nio.charset.Charset = java.nio.charset.StandardCharsets.UTF_8
     def inputStream(maximumSizeBetweenAcks: Long): java.io.InputStream with Acknowledgeable =
       new mocks.AcknowledgeableInputStream()
     def streamCreated: Boolean = true
