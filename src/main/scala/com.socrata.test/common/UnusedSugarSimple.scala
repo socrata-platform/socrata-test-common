@@ -10,7 +10,7 @@ import UnusedSugarSimple._
   * require type erasure.
   */
 trait UnusedSugarSimple {
-  val Unused: UnusedValue = UnusedObj
+  val Unused: UnusedValue = UnusedSugarSimple.UnusedObj
 
   implicit def unusedToAny(u: UnusedValue): AnyVal = false: AnyVal
   implicit def unusedToBoolean(u: UnusedValue): Boolean = false
