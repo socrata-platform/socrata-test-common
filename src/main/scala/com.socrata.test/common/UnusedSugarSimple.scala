@@ -3,6 +3,7 @@ package com.socrata.test.common
 import scala.language.implicitConversions
 import java.io._
 
+import UnusedSugarCommon._
 import UnusedSugarSimple._
 
 /** Like `UnusedSugarCommon` but avoids all conversions to types that would
@@ -31,8 +32,6 @@ trait UnusedSugarSimple {
 
 /** This can be imported instead of extending the state to get similar functionality. */
 object UnusedSugarSimple extends UnusedSugarSimple {
-  import UnusedSugarCommon._
-
   private val unusedString = "**UNUSED**"
   private val unusedInputStream = new ByteArrayInputStream(UnusedObj)
   private val unusedOutputStream = new ByteArrayOutputStream()

@@ -11,7 +11,7 @@ import com.socrata.http.server.HttpRequest.AugmentedHttpServletRequest
 import AugmentedServletRequest._
 import common.UnusedSugarCommon._
 
-class AugmentedServletRequest(private val headers: Map[String, Seq[String]],
+class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // scalastyle:ignore
                               private val params: Map[String, String],
                               private val method: String = "GET")
     extends HttpServletRequest {
@@ -62,7 +62,7 @@ class AugmentedServletRequest(private val headers: Map[String, Seq[String]],
   def getRemoteAddr(): String = Unused
   def getRemoteHost(): String = Unused
   def getRemotePort(): Int = Unused
-  def getRemoteUser(): String = ???
+  def getRemoteUser(): String = Unused
   def getRequestDispatcher(x$1: String): RequestDispatcher = throw new UnsupportedOperationException()
   def getRequestURI(): String = Unused
   def getRequestURL(): StringBuffer = Unused
@@ -91,8 +91,7 @@ class AugmentedServletRequest(private val headers: Map[String, Seq[String]],
   def startAsync(): AsyncContext = throw new UnsupportedOperationException()
   def startAsync(x$1: ServletRequest, x$2: ServletResponse): AsyncContext =
     throw new UnsupportedOperationException()
-  def upgrade[T <: HttpUpgradeHandler](x$1: Class[T]): T =
-    throw new UnsupportedOperationException()
+  def upgrade[T](x$1: Class[T]): T = throw new UnsupportedOperationException()
 }
 
 object AugmentedServletRequest {
