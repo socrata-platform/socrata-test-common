@@ -112,7 +112,10 @@ object UnusedSugarCommon extends UnusedSugarCommon {
     def getBytes(x$1: String): java.lang.Long = ???
     def getBytesList(x$1: String): java.util.List[java.lang.Long] = ???
     def getConfig(x$1: String): com.typesafe.config.Config = ???
+      // ScalaStyle chokes on this line.
+      // scalastyle:off
     def getConfigList(x$1: String): java.util.List[_ <: com.typesafe.config.Config] = ???
+      // scalastyle:on
     def getDouble(x$1: String): Double = ???
     def getDoubleList(x$1: String): java.util.List[java.lang.Double] = ???
     def getDuration(x$1: String,x$2: java.util.concurrent.TimeUnit): Long = ???
