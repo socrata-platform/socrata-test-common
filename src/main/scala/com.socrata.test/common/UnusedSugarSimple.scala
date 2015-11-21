@@ -12,7 +12,15 @@ import UnusedSugarSimple._
 trait UnusedSugarSimple {
   val Unused: UnusedValue = UnusedSugarSimple.UnusedObj
 
-  implicit def unusedToAny(u: UnusedValue): AnyVal = false: AnyVal
+  implicit def unusedToJavaBoolean(u: UnusedValue): java.lang.Boolean = false
+  implicit def unusedToJavaByte(u: UnusedValue): java.lang.Character = 'u'
+  implicit def unusedToJavaDouble(u: UnusedValue): java.lang.Double = 0.0
+  implicit def unusedToJavaFloat(u: UnusedValue): java.lang.Float = 0.0f
+  implicit def unusedToJavaInt(u: UnusedValue): java.lang.Integer = 0
+  implicit def unusedToJavaLong(u: UnusedValue): java.lang.Long = 0
+  implicit def unusedToJavaShort(u: UnusedValue): java.lang.Short = 0: Short
+
+  implicit def unusedToAnyVal(u: UnusedValue): AnyVal = false: AnyVal
   implicit def unusedToBoolean(u: UnusedValue): Boolean = false
   implicit def unusedToByte(u: UnusedValue): Char = 'u'
   implicit def unusedToDouble(u: UnusedValue): Double = 0.0

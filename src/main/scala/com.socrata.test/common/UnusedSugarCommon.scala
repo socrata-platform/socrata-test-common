@@ -100,58 +100,64 @@ object UnusedSugarCommon extends UnusedSugarCommon {
     def resultCode: Int = OK.statusCode
   }
 
+  // scalastyle:off number.of.methods
   private object EmptyConfig extends com.typesafe.config.Config {
-    def atKey(x$1: String): com.typesafe.config.Config = ???
-    def atPath(x$1: String): com.typesafe.config.Config = ???
-    def checkValid(x$1: com.typesafe.config.Config,x$2: String*): Unit = ???
-    def entrySet(): java.util.Set[java.util.Map.Entry[String,com.typesafe.config.ConfigValue]] = ???
-    def getAnyRef(x$1: String): Object = ???
-    def getAnyRefList(x$1: String): java.util.List[_] = ???
-    def getBoolean(x$1: String): Boolean = ???
-    def getBooleanList(x$1: String): java.util.List[java.lang.Boolean] = ???
-    def getBytes(x$1: String): java.lang.Long = ???
-    def getBytesList(x$1: String): java.util.List[java.lang.Long] = ???
-    def getConfig(x$1: String): com.typesafe.config.Config = ???
-      // ScalaStyle chokes on this line.
-      // scalastyle:off
-    def getConfigList(x$1: String): java.util.List[_ <: com.typesafe.config.Config] = ???
-      // scalastyle:on
-    def getDouble(x$1: String): Double = ???
-    def getDoubleList(x$1: String): java.util.List[java.lang.Double] = ???
-    def getDuration(x$1: String,x$2: java.util.concurrent.TimeUnit): Long = ???
+    def atKey(x$1: String): com.typesafe.config.Config = this
+    def atPath(x$1: String): com.typesafe.config.Config = this
+    def checkValid(x$1: com.typesafe.config.Config,x$2: String*): Unit = {}
+    def entrySet(): java.util.Set[java.util.Map.Entry[String,com.typesafe.config.ConfigValue]] =
+      new java.util.HashSet()
+    def getAnyRef(x$1: String): Object = this
+    def getAnyRefList(x$1: String): java.util.List[_] = Unused
+    def getBoolean(x$1: String): Boolean = Unused
+    def getBooleanList(x$1: String): java.util.List[java.lang.Boolean] = Unused
+    def getBytes(x$1: String): java.lang.Long = Unused
+    def getBytesList(x$1: String): java.util.List[java.lang.Long] = Unused
+    def getConfig(x$1: String): com.typesafe.config.Config = this
+    def getConfigList(x$1: String): java.util.List[com.typesafe.config.Config] = Unused
+    def getDouble(x$1: String): Double = Unused
+    def getDoubleList(x$1: String): java.util.List[java.lang.Double] = Unused
+    def getDuration(x$1: String,x$2: java.util.concurrent.TimeUnit): Long = Unused
     def getDurationList(x$1: String,
-                        x$2: java.util.concurrent.TimeUnit): java.util.List[java.lang.Long] = ???
-    def getInt(x$1: String): Int = ???
-    def getIntList(x$1: String): java.util.List[Integer] = ???
-    def getList(x$1: String): com.typesafe.config.ConfigList = ???
-    def getLong(x$1: String): Long = ???
-    def getLongList(x$1: String): java.util.List[java.lang.Long] = ???
-    def getMilliseconds(x$1: String): java.lang.Long = ???
-    def getMillisecondsList(x$1: String): java.util.List[java.lang.Long] = ???
-    def getNanoseconds(x$1: String): java.lang.Long = ???
-    def getNanosecondsList(x$1: String): java.util.List[java.lang.Long] = ???
-    def getNumber(x$1: String): Number = ???
-    def getNumberList(x$1: String): java.util.List[Number] = ???
-    def getObject(x$1: String): com.typesafe.config.ConfigObject = ???
-    def getObjectList(x$1: String): java.util.List[_ <: com.typesafe.config.ConfigObject] = ???
-    def getString(x$1: String): String = ???
-    def getStringList(x$1: String): java.util.List[String] = ???
-    def getValue(x$1: String): com.typesafe.config.ConfigValue = ???
-    def hasPath(x$1: String): Boolean = ???
-    def isEmpty(): Boolean = ???
-    def isResolved(): Boolean = ???
-    def origin(): com.typesafe.config.ConfigOrigin = ???
-    def resolve(x$1: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config = ???
-    def resolve(): com.typesafe.config.Config = ???
+                        x$2: java.util.concurrent.TimeUnit): java.util.List[java.lang.Long] = Unused
+    def getInt(x$1: String): Int = Unused
+    def getIntList(x$1: String): java.util.List[Integer] = Unused
+    def getList(x$1: String): com.typesafe.config.ConfigList =
+      throw new UnsupportedOperationException()
+    def getLong(x$1: String): Long = Unused
+    def getLongList(x$1: String): java.util.List[java.lang.Long] = Unused
+    def getMilliseconds(x$1: String): java.lang.Long = Unused
+    def getMillisecondsList(x$1: String): java.util.List[java.lang.Long] = Unused
+    def getNanoseconds(x$1: String): java.lang.Long = Unused
+    def getNanosecondsList(x$1: String): java.util.List[java.lang.Long] = Unused
+    def getNumber(x$1: String): Number = (Unused: java.lang.Long)
+    def getNumberList(x$1: String): java.util.List[Number] = Unused
+    def getObject(x$1: String): com.typesafe.config.ConfigObject = throw new UnsupportedOperationException()
+    def getObjectList(x$1: String): java.util.List[com.typesafe.config.ConfigObject] = Unused
+    def getString(x$1: String): String = Unused
+    def getStringList(x$1: String): java.util.List[String] = Unused
+    def getValue(x$1: String): com.typesafe.config.ConfigValue =
+      throw new UnsupportedOperationException()
+    def hasPath(x$1: String): Boolean = Unused
+    def isEmpty(): Boolean = Unused
+    def isResolved(): Boolean = Unused
+    def origin(): com.typesafe.config.ConfigOrigin = throw new UnsupportedOperationException()
+    def resolve(x$1: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config =
+      throw new UnsupportedOperationException()
+    def resolve(): com.typesafe.config.Config = throw new UnsupportedOperationException()
     def resolveWith(x$1: com.typesafe.config.Config,
-                    x$2: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config = ???
-    def resolveWith(x$1: com.typesafe.config.Config): com.typesafe.config.Config = ???
-    def root(): com.typesafe.config.ConfigObject = ???
-    def withFallback(x$1: com.typesafe.config.ConfigMergeable): com.typesafe.config.Config = ???
-    def withOnlyPath(x$1: String): com.typesafe.config.Config = ???
-    def withValue(x$1: String,x$2: com.typesafe.config.ConfigValue): com.typesafe.config.Config = ???
-    def withoutPath(x$1: String): com.typesafe.config.Config = ???
+                    x$2: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config =
+      throw new UnsupportedOperationException()
+    def resolveWith(x$1: com.typesafe.config.Config): com.typesafe.config.Config =
+      throw new UnsupportedOperationException()
+    def root(): com.typesafe.config.ConfigObject = throw new UnsupportedOperationException()
+    def withFallback(x$1: com.typesafe.config.ConfigMergeable): com.typesafe.config.Config = this
+    def withOnlyPath(x$1: String): com.typesafe.config.Config = this
+    def withValue(x$1: String,x$2: com.typesafe.config.ConfigValue): com.typesafe.config.Config =
+      throw new UnsupportedOperationException()
+    def withoutPath(x$1: String): com.typesafe.config.Config = this
   }
+  // scalastyle:on number.of.methods
 
   private object EmptyProvider extends ServerProvider(() => None, mocks.StaticHttpClient())
   private object EmptyClientConfig extends CuratedClientConfig(EmptyConfig, UnusedObj)
