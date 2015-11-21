@@ -64,7 +64,8 @@ class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletRe
   def getHeaderNames(): java.util.Collection[String] = headers.asJava.keySet
   def getHeaders(key: String): java.util.Collection[String] = headers(key).asJava
 
-  private var locale: java.util.Locale = java.util.Locale.getDefault()
+  private var locale: java.util.Locale =
+    new java.util.Locale.Builder().setLanguage("en").setRegion("US").build()
   def getLocale(): java.util.Locale = locale
   def setLocale(locale: java.util.Locale): Unit = mutate {
     this.locale = locale
