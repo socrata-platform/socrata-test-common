@@ -17,7 +17,7 @@ class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // 
 
   def getHeaderNames(): java.util.Enumeration[String] =
     Collections.enumeration(headers.keys.toSeq.asJava)
-  def getHeader(name: String): String = headers.asJava.get(name).head
+  def getHeader(name: String): String = headers.get(name).map(_.head).orNull
   def getHeaders(name: String): java.util.Enumeration[String] =
     Collections.enumeration(headers.asJava.get(name).asJava)
   def getIntHeader(name: String): Int = getHeader(name).toInt

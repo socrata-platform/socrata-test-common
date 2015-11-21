@@ -4,7 +4,7 @@ package common
 import scala.language.implicitConversions
 
 import com.rojoma.simplearm.v2.ResourceScope
-import com.socrata.curator.CuratedServiceClient
+import com.socrata.curator.{CuratedClientConfig, CuratedServiceClient, ServerProvider}
 
 import com.socrata.http.client.{HttpClient, RequestBuilder, Response, SimpleHttpRequest}
 import com.socrata.http.common.util.Acknowledgeable
@@ -100,12 +100,64 @@ object UnusedSugarCommon extends UnusedSugarCommon {
     def resultCode: Int = OK.statusCode
   }
 
-  // scalastyle:off null
-  private object EmptyCuratedServiceClient extends CuratedServiceClient(null, null) {
+  private object EmptyConfig extends com.typesafe.config.Config {
+    def atKey(x$1: String): com.typesafe.config.Config = ???
+    def atPath(x$1: String): com.typesafe.config.Config = ???
+    def checkValid(x$1: com.typesafe.config.Config,x$2: String*): Unit = ???
+    def entrySet(): java.util.Set[java.util.Map.Entry[String,com.typesafe.config.ConfigValue]] = ???
+    def getAnyRef(x$1: String): Object = ???
+    def getAnyRefList(x$1: String): java.util.List[_] = ???
+    def getBoolean(x$1: String): Boolean = ???
+    def getBooleanList(x$1: String): java.util.List[java.lang.Boolean] = ???
+    def getBytes(x$1: String): java.lang.Long = ???
+    def getBytesList(x$1: String): java.util.List[java.lang.Long] = ???
+    def getConfig(x$1: String): com.typesafe.config.Config = ???
+    def getConfigList(x$1: String): java.util.List[_ <: com.typesafe.config.Config] = ???
+    def getDouble(x$1: String): Double = ???
+    def getDoubleList(x$1: String): java.util.List[java.lang.Double] = ???
+    def getDuration(x$1: String,x$2: java.util.concurrent.TimeUnit): Long = ???
+    def getDurationList(x$1: String,
+                        x$2: java.util.concurrent.TimeUnit): java.util.List[java.lang.Long] = ???
+    def getInt(x$1: String): Int = ???
+    def getIntList(x$1: String): java.util.List[Integer] = ???
+    def getList(x$1: String): com.typesafe.config.ConfigList = ???
+    def getLong(x$1: String): Long = ???
+    def getLongList(x$1: String): java.util.List[java.lang.Long] = ???
+    def getMilliseconds(x$1: String): java.lang.Long = ???
+    def getMillisecondsList(x$1: String): java.util.List[java.lang.Long] = ???
+    def getNanoseconds(x$1: String): java.lang.Long = ???
+    def getNanosecondsList(x$1: String): java.util.List[java.lang.Long] = ???
+    def getNumber(x$1: String): Number = ???
+    def getNumberList(x$1: String): java.util.List[Number] = ???
+    def getObject(x$1: String): com.typesafe.config.ConfigObject = ???
+    def getObjectList(x$1: String): java.util.List[_ <: com.typesafe.config.ConfigObject] = ???
+    def getString(x$1: String): String = ???
+    def getStringList(x$1: String): java.util.List[String] = ???
+    def getValue(x$1: String): com.typesafe.config.ConfigValue = ???
+    def hasPath(x$1: String): Boolean = ???
+    def isEmpty(): Boolean = ???
+    def isResolved(): Boolean = ???
+    def origin(): com.typesafe.config.ConfigOrigin = ???
+    def resolve(x$1: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config = ???
+    def resolve(): com.typesafe.config.Config = ???
+    def resolveWith(x$1: com.typesafe.config.Config,
+                    x$2: com.typesafe.config.ConfigResolveOptions): com.typesafe.config.Config = ???
+    def resolveWith(x$1: com.typesafe.config.Config): com.typesafe.config.Config = ???
+    def root(): com.typesafe.config.ConfigObject = ???
+    def withFallback(x$1: com.typesafe.config.ConfigMergeable): com.typesafe.config.Config = ???
+    def withOnlyPath(x$1: String): com.typesafe.config.Config = ???
+    def withValue(x$1: String,x$2: com.typesafe.config.ConfigValue): com.typesafe.config.Config = ???
+    def withoutPath(x$1: String): com.typesafe.config.Config = ???
+  }
+
+  private object EmptyProvider extends ServerProvider(() => None, mocks.StaticHttpClient())
+  private object EmptyClientConfig extends CuratedClientConfig(EmptyConfig, UnusedObj)
+
+  private object EmptyCuratedServiceClient
+      extends CuratedServiceClient(EmptyProvider, EmptyClientConfig) {
     override def execute[T](request: RequestBuilder => SimpleHttpRequest,
                             callback: Response => T): T = callback(EmptyResponse)
   }
-  // scalastyle:on null
 
   // This has to live here so the companion object can extend the trait.
   private object UnusedObj extends UnusedValue
