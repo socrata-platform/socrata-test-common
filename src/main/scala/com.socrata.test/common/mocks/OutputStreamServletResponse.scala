@@ -1,4 +1,4 @@
-package com.socrata.test
+package com.socrata.test.common
 package mocks
 
 import scala.collection.JavaConverters._
@@ -7,7 +7,7 @@ import java.nio.charset.{Charset, StandardCharsets}
 import javax.servlet.ServletOutputStream
 import javax.servlet.http.HttpServletResponse
 
-import common.UnusedSugarCommon._
+import UnusedSugarCommon._
 
 class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletResponse { // scalastyle:ignore
   def getOutputStream(): javax.servlet.ServletOutputStream = os

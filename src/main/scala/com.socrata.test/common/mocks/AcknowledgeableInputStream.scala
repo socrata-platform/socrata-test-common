@@ -1,4 +1,4 @@
-package com.socrata.test.mocks
+package com.socrata.test.common.mocks
 
 import java.io.{ByteArrayInputStream, InputStream}
 import java.nio.charset.{Charset, StandardCharsets}
@@ -17,4 +17,11 @@ class AcknowledgeableInputStream(payload: Array[Byte])
 
   override def acknowledge(): Unit = ()
   override def read(): Int = underlying.read
+}
+
+object AcknowledgeableInputStream {
+  def apply(payload: Array[Byte]): AcknowledgeableInputStream = new AcknowledgeableInputStream(payload)
+  def apply(payload: String, charset: Charset): AcknowledgeableInputStream = apply(payload.getBytes(charset))
+  def apply(payload: String): AcknowledgeableInputStream = apply(payload, StandardCharsets.UTF_8)
+  def apply(): AcknowledgeableInputStream = apply(Array.empty[Byte])
 }

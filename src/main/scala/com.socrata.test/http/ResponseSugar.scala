@@ -7,6 +7,7 @@ import scala.collection.JavaConverters._
 import com.socrata.http.server.HttpResponse
 
 import ResponseSugar._
+import common.mocks
 
 trait ResponseSugar {
   def unpackResponse(serverResp: HttpResponse): UnpackedResponse = {

@@ -1,4 +1,4 @@
-package com.socrata.test.mocks
+package com.socrata.test.common.mocks
 
 import javax.servlet.http.HttpServletRequest
 

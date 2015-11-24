@@ -1,4 +1,4 @@
-package com.socrata.test
+package com.socrata.test.common
 package mocks
 
 import java.util.Collections
@@ -6,7 +6,7 @@ import javax.servlet._
 import javax.servlet.http._
 import scala.collection.JavaConverters._
 
-import common.UnusedSugarCommon._
+import UnusedSugarCommon._
 
 class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // scalastyle:ignore
                               private val params: Map[String, String],

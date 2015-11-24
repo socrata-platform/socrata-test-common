@@ -1,4 +1,4 @@
-package com.socrata.test
+package com.socrata.test.common
 package mocks
 
 import java.io.ByteArrayInputStream

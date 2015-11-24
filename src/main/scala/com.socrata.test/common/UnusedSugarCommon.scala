@@ -64,7 +64,7 @@ trait UnusedSugarCommon extends UnusedSugarSimple {
 
   // Optional Dependencies.
   implicit def unusedToCuratedServiceClient(u: UnusedValue): CuratedServiceClient =
-    EmptyCuratedServiceClient
+    mocks.StaticCuratedClient()
 
   implicit def unusedToResourceScope(u: UnusedValue): ResourceScope = resourceScope
 
@@ -78,7 +78,7 @@ trait UnusedSugarCommon extends UnusedSugarSimple {
   }
 
   implicit def unusedToRequestBuilder(u: UnusedValue): RequestBuilder =
-    RequestBuilder(UnusedObj)
+    RequestBuilder(Unused)
 
   implicit def unusedToHttpClient(u: UnusedValue): HttpClient =
     mocks.StaticHttpClient()
@@ -88,7 +88,7 @@ trait UnusedSugarCommon extends UnusedSugarSimple {
 object UnusedSugarCommon extends UnusedSugarCommon {
   type UnusedValue = UnusedSugarSimple.UnusedValue
 
-  private object EmptyResponse extends Response {
+  object EmptyResponse extends Response {
     def charset: java.nio.charset.Charset = java.nio.charset.StandardCharsets.UTF_8
     def inputStream(maximumSizeBetweenAcks: Long): java.io.InputStream with Acknowledgeable =
       new mocks.AcknowledgeableInputStream()
@@ -101,7 +101,7 @@ object UnusedSugarCommon extends UnusedSugarCommon {
   }
 
   // scalastyle:off number.of.methods
-  private object EmptyConfig extends com.typesafe.config.Config {
+  object EmptyConfig extends com.typesafe.config.Config {
     def atKey(x$1: String): com.typesafe.config.Config = this
     def atPath(x$1: String): com.typesafe.config.Config = this
     def checkValid(x$1: com.typesafe.config.Config,x$2: String*): Unit = {}
@@ -158,18 +158,5 @@ object UnusedSugarCommon extends UnusedSugarCommon {
     def withoutPath(x$1: String): com.typesafe.config.Config = this
   }
   // scalastyle:on number.of.methods
-
-  private object EmptyProvider extends ServerProvider(() => None, mocks.StaticHttpClient())
-  private object EmptyClientConfig extends CuratedClientConfig(EmptyConfig, UnusedObj)
-
-  private object EmptyCuratedServiceClient
-      extends CuratedServiceClient(EmptyProvider, EmptyClientConfig) {
-    override def execute[T](request: RequestBuilder => SimpleHttpRequest,
-                            callback: Response => T): T = callback(EmptyResponse)
-  }
-
-  // This has to live here so the companion object can extend the trait.
-  private object UnusedObj extends UnusedValue
-
   private val rs = new ResourceScope
 }

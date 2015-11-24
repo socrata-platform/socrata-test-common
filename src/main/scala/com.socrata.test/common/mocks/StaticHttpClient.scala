@@ -1,4 +1,4 @@
-package com.socrata.test.mocks
+package com.socrata.test.common.mocks
 
 import java.io.Closeable
 
@@ -21,7 +21,7 @@ class StaticHttpClient(val respBuilder: (SimpleHttpRequest => Response)) extends
 object StaticHttpClient {
   def apply(f: SimpleHttpRequest => Response): StaticHttpClient = new StaticHttpClient(f)
   def apply(resp: Response): StaticHttpClient = apply(_ => resp)
-  def apply(resp: String, resultCode: Int = OK.statusCode): StaticHttpClient =
-    apply(StaticResponse(resp, resultCode))
+  def apply(resp: String, statusCode: Int = OK.statusCode): StaticHttpClient =
+    apply(StaticResponse(resp, statusCode))
   def apply(): StaticHttpClient = apply("")
 }
