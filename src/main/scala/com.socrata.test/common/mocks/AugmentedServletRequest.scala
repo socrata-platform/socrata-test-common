@@ -92,17 +92,17 @@ class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // 
 }
 
 object AugmentedServletRequest {
-  private val Unset = ("", "")
   private def listify(m: Map[String, String]): Map[String, Seq[String]] = m.map { case (k, v) =>
     k -> Seq(v)
   }
 
-  def apply(header: (String, String) = Unset,
-            param: (String, String) = Unset,
-            headers: Map[String, String] = Map.empty,
-            params: Map[String, String] = Map.empty): AugmentedServletRequest = {
-    val hdrs = if (header eq Unset) Map(header) else headers
-    val prms = if (param eq Unset) Map(param) else params
-    new AugmentedServletRequest(listify(hdrs), prms)
-  }
+  def apply(headers: Map[String, String],
+            params: Map[String, String]): AugmentedServletRequest =
+    new AugmentedServletRequest(listify(headers), params)
+
+  def apply(header: (String, String), param: (String, String)): AugmentedServletRequest =
+    apply(Map(header), Map(param))
+
+  def apply(): AugmentedServletRequest =
+    apply(Map.empty[String, String], Map.empty[String, String])
 }

@@ -40,7 +40,7 @@ trait UnusedSugarSimple {
 
 /** This can be imported instead of extending the state to get similar functionality. */
 object UnusedSugarSimple extends UnusedSugarSimple {
-  private val unusedString = "**UNUSED**"
+  private val unusedString = "UNUSED"
   private val unusedInputStream = new ByteArrayInputStream(UnusedObj)
   private val unusedOutputStream = new ByteArrayOutputStream()
 

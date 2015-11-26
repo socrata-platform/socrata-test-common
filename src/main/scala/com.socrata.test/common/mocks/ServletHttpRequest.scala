@@ -20,5 +20,12 @@ object ServletHttpRequest {
   def apply(underlying: HttpServletRequest): ServletHttpRequest =
     new ServletHttpRequest(underlying)
 
+  def apply(header: (String, String), param: (String, String)): ServletHttpRequest =
+    apply(AugmentedServletRequest(header = header, param = param))
+
+  def apply(headers: Map[String, String],
+            params: Map[String, String]): ServletHttpRequest =
+    apply(AugmentedServletRequest(headers = headers, params = params))
+
   def apply(): ServletHttpRequest = apply(AugmentedServletRequest())
 }
