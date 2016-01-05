@@ -59,8 +59,34 @@ output and using the underlying `HttpServletResponse`
 # A Simple Example #
 This is an example from TileServer.
 
-`TestBase` pulls in `ResponseSugar` and `MustMatchers`.
+TestBase.scala:
+```scala
+import org.scalatest._
+import org.scalatest.matchers._
+import org.scalatest.prop.PropertyChecks
+import com.socrata.test.http.ResponseSugar
 
+// scalastyle:off import.grouping
+trait TestBase
+    extends FunSuite
+    with org.scalatest.MustMatchers
+    with ResponseSugar
+    with PropertyChecks
+```
+
+UnusedSugar.scala:
+```scala
+import scala.language.implicitConversions
+
+import com.socrata.test.common.UnusedSugarCommon
+
+trait UnusedSugar extends UnusedSugarCommon {
+  // Custom Conversions.
+  // eg. implicit def unusedToFoo(u: UnusedValue): Foo = Foo.empty
+}
+```
+
+VersionServiceTest.scala:
 ```scala
 import com.socrata.http.server.responses._
 
