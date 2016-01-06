@@ -11,6 +11,18 @@ import com.socrata.http.server.responses._
 import StaticCuratedClient._
 import UnusedSugarCommon._
 
+/** A `CuratedServiceClient` that will return a user provided response (or a
+  * response generated from a provided factory).
+  *
+  * Instances of this class should be created via function application on the
+  * companion `object`.
+  *
+  * There are a variety of useful overloads provided, however more
+  * customization points may be needed.
+  *
+  * Don't hesitate to submit a pull-request if you find any that are useful to
+  * your project.
+  */
 class StaticCuratedClient(resp: CuratedRequest => Response)
     extends CuratedServiceClient(EmptyProvider, EmptyClientConfig) {
   override def execute[T](request: RequestBuilder => SimpleHttpRequest,

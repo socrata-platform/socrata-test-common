@@ -2,12 +2,10 @@
 Various utilities to make testing easier (especially using Socrata
 libraries).
 
-## com.socrata.test.common ##
+## com.socrata.testcommon ##
 Generally applicable test code/patterns.
 
 ### UnusedSugarCommon ###
-The most interesting class in the base package is `UnusedSugarCommon`.
-
 Mixing in this trait gives you access to a val named `Unused`, and a
 series of conversions to make `Unused` a substitute for most common
 built-in classes.
@@ -19,11 +17,15 @@ types custom to your project.
 Also, when using `UnusedSugarCommon` one should generally call
 `resourceScope.close()` between tests to avoid leaking resources.
 
-### UnusedSugarSimple ###
-The other class of interest in the base package is
-`UnusedSugarSimple`.  This is worth extending if some of the generic
-conversions are causing trouble for you inside of
-`UnusedSugarCommon`.
+### UnusedSugarStandard ###
+This class is like `UnusedSugarCommon`, except it doesn't include any
+references to any of the optional dependencies (socrata-http,
+socrata-curator-utils, etc).
+
+### UnusedSugarStandardSimple ###
+This is worth extending if some of the generic conversions are causing
+trouble for you inside of `UnusedSugarCommon` or
+`UnusedSugarStandard`.
 
 For example `Map[K, V]` extends `K => V` and thus could cause issues
 if you want to overload a specific function.
@@ -31,7 +33,14 @@ if you want to overload a specific function.
 The downside of extending this is that you lose those same generic
 conversions so will have to define any you need yourself.
 
-### com.socrata.test.common.mocks ###
+### ResponseSugar ###
+When `ResponseSugar` is mixed in provides `unpackResponse`.
+
+This is useful because it allows accessing responses via the Scala API
+that Socrata-Http provides instead of having to fall back to capturing
+output and using the underlying `HttpServletResponse`
+
+### com.socrata.testcommon.mocks ###
 This package contains various useful mocks, mostly related to
 Socrata-Http.
 
@@ -42,23 +51,7 @@ A useful pattern is to put project specific mock classes in a package
 called `mocks` and to import these mocks as `common.mocks` to avoid
 confusing/shadowing of packages.
 
-## com.socrata.test.http ##
-Code directly related to Socrata-Http.
-
-To use this functionality you will need to pull in the appropriate
-socrata-http packages as dependencies.
-
-### ResponseSugar ###
-Currently the only class in this package is `ResponseSugar`, which
-when mixed in provides `unpackResponse`.
-
-This is useful because it allows accessing responses via the Scala API
-that Socrata-Http provides instead of having to fall back to capturing
-output and using the underlying `HttpServletResponse`
-
 # A Simple Example #
-This is an example from TileServer.
-
 TestBase.scala:
 ```scala
 import org.scalatest._
@@ -71,14 +64,16 @@ trait TestBase
     extends FunSuite
     with org.scalatest.MustMatchers
     with ResponseSugar
-    with PropertyChecks
+    with PropertyChecks {
+    // Useful functions to be shared with all of your test classes.
+}
 ```
 
 UnusedSugar.scala:
 ```scala
 import scala.language.implicitConversions
 
-import com.socrata.test.common.UnusedSugarCommon
+import com.socrata.testcommon.UnusedSugarCommon
 
 trait UnusedSugar extends UnusedSugarCommon {
   // Custom Conversions.

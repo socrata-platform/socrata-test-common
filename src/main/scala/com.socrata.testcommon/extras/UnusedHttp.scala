@@ -9,9 +9,10 @@ import com.socrata.http.client.{HttpClient, RequestBuilder, Response}
 import com.socrata.http.server.responses._
 import com.socrata.http.server.{HttpRequest, HttpResponse}
 
-import UnusedSugarSimple._
+import UnusedSugarStandardSimple._
 
-trait UnusedHttp extends UnusedSugarSimple with UnusedSimpleArm {
+/** Adds conversions from `Unused` to various classes used with Socrata-Http. */
+trait UnusedHttp extends UnusedSugarStandardSimple with UnusedSimpleArm {
   private val rs = this.resourceScope
 
   implicit def unusedToRespToHttpResponse(u: UnusedValue): Response => HttpResponse = { r => OK }

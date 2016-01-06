@@ -1,5 +1,6 @@
 package com.socrata.testcommon
 package mocks
+package util
 
 import java.io.ByteArrayInputStream
 import javax.servlet.ServletInputStream

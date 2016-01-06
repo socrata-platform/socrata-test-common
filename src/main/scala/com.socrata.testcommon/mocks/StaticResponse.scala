@@ -13,6 +13,18 @@ import com.socrata.http.server.responses._
 
 import StaticResponse._
 
+/** Represents a response from a `HttpClient`, especially useful when combined
+  * with `StaticHttpClient`.
+  *
+  * Instances of this class should be created via function application on the
+  * companion `object`.
+  *
+  * There are a variety of useful overloads provided, however more
+  * customization points may be needed.
+  *
+  * Don't hesitate to submit a pull-request if you find any that are useful to
+  * your project.
+  */
 class StaticResponse private (val input: InputStream with Acknowledgeable,
                               val resultCode: Int,
                               rawHeaders: Map[String, Array[String]],

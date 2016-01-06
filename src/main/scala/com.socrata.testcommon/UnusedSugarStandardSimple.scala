@@ -3,14 +3,13 @@ package com.socrata.testcommon
 import scala.language.implicitConversions
 import java.io._
 
-import UnusedSugarCommon._
-import UnusedSugarSimple._
+import UnusedSugarStandard._
+import UnusedSugarStandardSimple._
 
-/** Like `UnusedSugarCommon` but avoids all conversions to types that would
-  * require type erasure.
-  */
-trait UnusedSugarSimple {
-  val Unused: UnusedValue = UnusedSugarSimple.UnusedObj
+/** Like `UnusedSugarStandard` but avoids all conversions to types that would
+  * require type erasure. */
+trait UnusedSugarStandardSimple {
+  val Unused: UnusedValue = UnusedSugarStandardSimple.UnusedObj
 
   implicit def unusedToJavaBoolean(u: UnusedValue): java.lang.Boolean = false
   implicit def unusedToJavaByte(u: UnusedValue): java.lang.Character = 'u'
@@ -38,8 +37,8 @@ trait UnusedSugarSimple {
     new java.io.BufferedReader(new EmptyReader())
 }
 
-/** This can be imported instead of extending the state to get similar functionality. */
-object UnusedSugarSimple extends UnusedSugarSimple {
+/** This can be imported instead of extending the trait to get similar functionality. */
+object UnusedSugarStandardSimple extends UnusedSugarStandardSimple {
   private val unusedString = "UNUSED"
   private val unusedInputStream = new ByteArrayInputStream(UnusedObj)
   private val unusedOutputStream = new ByteArrayOutputStream()
