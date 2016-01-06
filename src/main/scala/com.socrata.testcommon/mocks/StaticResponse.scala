@@ -25,10 +25,22 @@ import StaticResponse._
   * Don't hesitate to submit a pull-request if you find any that are useful to
   * your project.
   */
-class StaticResponse private (val input: InputStream with Acknowledgeable,
-                              val resultCode: Int,
-                              rawHeaders: Map[String, Array[String]],
-                              val ct: String) extends Response {
+class StaticResponse protected (val input: InputStream with Acknowledgeable,
+                                val resultCode: Int,
+                                rawHeaders: Map[String, Array[String]],
+                                val ct: String) extends Response {
+  protected def this(payload: Array[Byte],
+                     resultCode: Int,
+                     rawHeaders: Map[String, Array[String]],
+                     ct: String) =
+    this(util.AcknowledgeableInputStream(payload), resultCode, rawHeaders, ct)
+
+  protected def this(payload: String,
+                     resultCode: Int,
+                     rawHeaders: Map[String, Array[String]],
+                     ct: String) =
+    this(util.AcknowledgeableInputStream(payload), resultCode, rawHeaders, ct)
+
   val resourceScope = rs
   val charset: Charset = StandardCharsets.UTF_8
   val streamCreated = true

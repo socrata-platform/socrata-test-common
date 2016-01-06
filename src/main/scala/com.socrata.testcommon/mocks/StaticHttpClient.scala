@@ -17,7 +17,7 @@ import com.socrata.http.server.responses._
   * Don't hesitate to submit a pull-request if you find any that are useful to
   * your project.
   */
-class StaticHttpClient private (val respBuilder: (SimpleHttpRequest => Response)) extends HttpClient {
+class StaticHttpClient protected (val respBuilder: (SimpleHttpRequest => Response)) extends HttpClient {
   val close: Unit = ()
 
   private def rawResp(r: Response) = new RawResponse with Closeable {

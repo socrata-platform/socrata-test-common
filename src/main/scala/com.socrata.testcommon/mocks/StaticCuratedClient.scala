@@ -23,7 +23,7 @@ import UnusedSugarCommon._
   * Don't hesitate to submit a pull-request if you find any that are useful to
   * your project.
   */
-class StaticCuratedClient(resp: CuratedRequest => Response)
+class StaticCuratedClient protected (resp: CuratedRequest => Response)
     extends CuratedServiceClient(EmptyProvider, EmptyClientConfig) {
   override def execute[T](request: RequestBuilder => SimpleHttpRequest,
                           callback: Response => T): T = callback(resp(request))

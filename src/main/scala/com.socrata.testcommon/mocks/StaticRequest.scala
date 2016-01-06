@@ -24,7 +24,7 @@ import StaticRequest._
   * Don't hesitate to submit a pull-request if you find any that are useful to
   * your project.
   */
-class StaticRequest private (underlying: HttpServletRequest) extends HttpRequest {
+class StaticRequest protected (underlying: HttpServletRequest) extends HttpRequest {
   val resourceScope: ResourceScope = rs
   def servletRequest: AugmentedHttpServletRequest = new AugmentedHttpServletRequest(underlying)
 }
