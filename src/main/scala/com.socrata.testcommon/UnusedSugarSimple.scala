@@ -1,4 +1,4 @@
-package com.socrata.test.common
+package com.socrata.testcommon
 
 import scala.language.implicitConversions
 import java.io._

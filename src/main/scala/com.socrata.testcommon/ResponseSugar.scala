@@ -1,5 +1,4 @@
-package com.socrata.test
-package http
+package com.socrata.testcommon
 
 import javax.servlet.http.HttpServletResponse
 import scala.collection.JavaConverters._
@@ -7,11 +6,10 @@ import scala.collection.JavaConverters._
 import com.socrata.http.server.HttpResponse
 
 import ResponseSugar._
-import common.mocks
 
 trait ResponseSugar {
   def unpackResponse(serverResp: HttpResponse): UnpackedResponse = {
-    val os = new mocks.CapturingServletOutputStream
+    val os = new mocks.util.CapturingServletOutputStream
     val resp = os.responseFor
     serverResp(resp) // Mutates `resp`
     resp.freeze()    // Now we can pretend this is a reasonable class!
@@ -20,7 +18,7 @@ trait ResponseSugar {
 }
 
 object ResponseSugar extends ResponseSugar {
-  class Body(stream: mocks.CapturingServletOutputStream) {
+  class Body(stream: mocks.util.CapturingServletOutputStream) {
     val toByteArray: Array[Byte] = stream.getBytes
     override lazy val toString: String = stream.getString
     lazy val toLowStr: String = stream.getLowStr
@@ -28,7 +26,7 @@ object ResponseSugar extends ResponseSugar {
   }
 
   class UnpackedResponse(val underlying: HttpServletResponse,
-                         stream: mocks.CapturingServletOutputStream) {
+                         stream: mocks.util.CapturingServletOutputStream) {
     val status: Int = underlying.getStatus
     lazy val statusCode: Int = status
     lazy val contentType: String = underlying.getContentType

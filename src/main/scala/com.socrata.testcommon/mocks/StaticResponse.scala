@@ -1,4 +1,4 @@
-package com.socrata.test.common.mocks
+package com.socrata.testcommon.mocks
 
 import java.io.InputStream
 import java.nio.charset.{Charset, StandardCharsets}
@@ -13,10 +13,10 @@ import com.socrata.http.server.responses._
 
 import StaticResponse._
 
-class StaticResponse(val input: InputStream with Acknowledgeable,
-                     val resultCode: Int,
-                     rawHeaders: Map[String, Array[String]],
-                     val ct: String) extends Response {
+class StaticResponse private (val input: InputStream with Acknowledgeable,
+                              val resultCode: Int,
+                              rawHeaders: Map[String, Array[String]],
+                              val ct: String) extends Response {
   val resourceScope = rs
   val charset: Charset = StandardCharsets.UTF_8
   val streamCreated = true
@@ -32,15 +32,15 @@ object StaticResponse {
 
   def apply(payload: Array[Byte],
             statusCode: Int,
-            headers: Map[String, Array[String]]): StaticResponse =
-    new StaticResponse(AcknowledgeableInputStream(payload), statusCode, headers, "application/octet-stream")
+            headers: Map[String, Array[String]]): StaticResponse = new StaticResponse(
+    util.AcknowledgeableInputStream(payload), statusCode, headers, "application/octet-stream")
   def apply(payload: Array[Byte]): StaticResponse = apply(payload, OK.statusCode, Map.empty)
 
   def apply(message: String,
             statusCode: Int,
             headers: Map[String, Array[String]],
-            contentType: String): StaticResponse =
-    new StaticResponse(AcknowledgeableInputStream(message), statusCode, headers, contentType)
+            contentType: String): StaticResponse = new StaticResponse(
+    util.AcknowledgeableInputStream(message), statusCode, headers, contentType)
 
   def apply(message: String, statusCode: Int): StaticResponse =
     apply(message, statusCode, Map.empty, "application/json")

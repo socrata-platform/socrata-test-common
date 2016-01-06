@@ -1,5 +1,6 @@
-package com.socrata.test.common
+package com.socrata.testcommon
 package mocks
+package util
 
 import java.util.Collections
 import javax.servlet._
@@ -8,9 +9,10 @@ import scala.collection.JavaConverters._
 
 import UnusedSugarCommon._
 
-class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // scalastyle:ignore
-                              private val params: Map[String, String],
-                              private val method: String = "GET")
+// scalastyle:off number.of.methods
+class AugmentedServletRequest private (private val headers: Map[String, Seq[String]],
+                                       private val params: Map[String, String],
+                                       private val method: String = "GET")
     extends HttpServletRequest {
   def getQueryString(): String =
     params map { case (k, v) => s"$k=$v" } mkString "&"
@@ -90,19 +92,20 @@ class AugmentedServletRequest(private val headers: Map[String, Seq[String]], // 
     throw new UnsupportedOperationException()
   def upgrade[T](x$1: Class[T]): T = throw new UnsupportedOperationException()
 }
+// scalastyle:on number.of.methods
 
 object AugmentedServletRequest {
   private def listify(m: Map[String, String]): Map[String, Seq[String]] = m.map { case (k, v) =>
     k -> Seq(v)
   }
 
-  def apply(headers: Map[String, String],
-            params: Map[String, String]): AugmentedServletRequest =
+  private[testcommon] def apply(headers: Map[String, String],
+                           params: Map[String, String]): AugmentedServletRequest =
     new AugmentedServletRequest(listify(headers), params)
 
-  def apply(header: (String, String), param: (String, String)): AugmentedServletRequest =
+  private[testcommon] def apply(header: (String, String), param: (String, String)): AugmentedServletRequest =
     apply(Map(header), Map(param))
 
-  def apply(): AugmentedServletRequest =
+  private[testcommon] def apply(): AugmentedServletRequest =
     apply(Map.empty[String, String], Map.empty[String, String])
 }
