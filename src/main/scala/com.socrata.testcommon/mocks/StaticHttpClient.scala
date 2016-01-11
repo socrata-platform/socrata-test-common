@@ -1,11 +1,23 @@
-package com.socrata.test.common.mocks
+package com.socrata.testcommon.mocks
 
 import java.io.Closeable
 
 import com.socrata.http.client._
 import com.socrata.http.server.responses._
 
-class StaticHttpClient(val respBuilder: (SimpleHttpRequest => Response)) extends HttpClient {
+/** A `HttpClient` that will return a user provided response (or a response
+  * generated from a provided factory).
+  *
+  * Instances of this class should be created via function application on the
+  * companion `object`.
+  *
+  * There are a variety of useful overloads provided, however more
+  * customization points may be needed.
+  *
+  * Don't hesitate to submit a pull-request if you find any that are useful to
+  * your project.
+  */
+class StaticHttpClient protected (val respBuilder: (SimpleHttpRequest => Response)) extends HttpClient {
   val close: Unit = ()
 
   private def rawResp(r: Response) = new RawResponse with Closeable {

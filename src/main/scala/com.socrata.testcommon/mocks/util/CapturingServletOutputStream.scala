@@ -1,5 +1,6 @@
-package com.socrata.test.common
+package com.socrata.testcommon
 package mocks
+package util
 
 import java.io.ByteArrayOutputStream
 import java.nio.charset.Charset
@@ -7,7 +8,7 @@ import java.nio.charset.StandardCharsets.UTF_8
 import javax.servlet.ServletOutputStream
 import javax.servlet.http.HttpServletResponse
 
-class CapturingServletOutputStream extends ServletOutputStream {
+class CapturingServletOutputStream private[testcommon] extends ServletOutputStream {
   val underlying: ByteArrayOutputStream = new ByteArrayOutputStream
 
   def write(x: Int): Unit = underlying.write(x)

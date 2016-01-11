@@ -1,5 +1,5 @@
-package com.socrata.test.common
-package mocks
+package com.socrata.testcommon
+package mocks.util
 
 import scala.collection.JavaConverters._
 
@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse
 
 import UnusedSugarCommon._
 
-class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletResponse { // scalastyle:ignore
+// scalastyle:off number.of.methods
+class OutputStreamServletResponse private[mocks] (os: ServletOutputStream) extends HttpServletResponse {
   def getOutputStream(): javax.servlet.ServletOutputStream = os
   def getWriter(): java.io.PrintWriter = new java.io.PrintWriter(os)
 
@@ -100,3 +101,4 @@ class OutputStreamServletResponse(os: ServletOutputStream) extends HttpServletRe
   def encodeUrl(x$1: String): String = Unused
   def getBufferSize(): Int = Unused
 }
+// scalastyle:on number.of.methods

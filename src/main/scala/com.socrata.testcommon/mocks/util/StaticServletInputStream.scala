@@ -1,10 +1,11 @@
-package com.socrata.test.common
+package com.socrata.testcommon
 package mocks
+package util
 
 import java.io.ByteArrayInputStream
 import javax.servlet.ServletInputStream
 
-class StaticServletInputStream(payload: Array[Byte]) extends ServletInputStream {
+class StaticServletInputStream private (payload: Array[Byte]) extends ServletInputStream {
   val underlying = new ByteArrayInputStream(payload)
   private var nextRead: Option[Int] = Some(underlying.read()).filter(_ != -1)
 
@@ -27,5 +28,8 @@ class StaticServletInputStream(payload: Array[Byte]) extends ServletInputStream 
 }
 
 object StaticServletInputStream {
-  def apply(): StaticServletInputStream = new StaticServletInputStream(Array.empty)
+  private[mocks] def apply(payload: Array[Byte]): StaticServletInputStream =
+    new StaticServletInputStream(payload)
+
+  private[mocks] def apply(): StaticServletInputStream = apply(Array.empty)
 }

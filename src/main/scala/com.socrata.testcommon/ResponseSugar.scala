@@ -1,5 +1,4 @@
-package com.socrata.test
-package http
+package com.socrata.testcommon
 
 import javax.servlet.http.HttpServletResponse
 import scala.collection.JavaConverters._
@@ -7,11 +6,20 @@ import scala.collection.JavaConverters._
 import com.socrata.http.server.HttpResponse
 
 import ResponseSugar._
-import common.mocks
 
+/** This trait should be used when you need to handle Socrata-Http responses in
+  * your tests.
+  *
+  * The `unpackResponse` allows HttpResponse objects to be treated as though
+  * they are immutable in test assertions.
+  *
+  * If you are asserting on something you think would be useful for other
+  * consumers of this library, please submit a pull request adding appropriate
+  * methods/`val`s to the `UnpackedResponse` class.
+  */
 trait ResponseSugar {
   def unpackResponse(serverResp: HttpResponse): UnpackedResponse = {
-    val os = new mocks.CapturingServletOutputStream
+    val os = new mocks.util.CapturingServletOutputStream
     val resp = os.responseFor
     serverResp(resp) // Mutates `resp`
     resp.freeze()    // Now we can pretend this is a reasonable class!
@@ -20,15 +28,15 @@ trait ResponseSugar {
 }
 
 object ResponseSugar extends ResponseSugar {
-  class Body(stream: mocks.CapturingServletOutputStream) {
+  class Body(stream: mocks.util.CapturingServletOutputStream) {
     val toByteArray: Array[Byte] = stream.getBytes
     override lazy val toString: String = stream.getString
     lazy val toLowStr: String = stream.getLowStr
     lazy val toLowerCaseString: String = stream.getLowStr
   }
 
-  class UnpackedResponse(val underlying: HttpServletResponse,
-                         stream: mocks.CapturingServletOutputStream) {
+  class UnpackedResponse private[ResponseSugar] (val underlying: HttpServletResponse,
+                                                 stream: mocks.util.CapturingServletOutputStream) {
     val status: Int = underlying.getStatus
     lazy val statusCode: Int = status
     lazy val contentType: String = underlying.getContentType
