@@ -57,7 +57,7 @@ TestBase.scala:
 import org.scalatest._
 import org.scalatest.matchers._
 import org.scalatest.prop.PropertyChecks
-import com.socrata.test.http.ResponseSugar
+import com.socrata.testcommon.ResponseSugar
 
 // scalastyle:off import.grouping
 trait TestBase
