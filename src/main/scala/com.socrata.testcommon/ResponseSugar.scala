@@ -56,11 +56,15 @@ object ResponseSugar extends ResponseSugar {
 
     private def ellipsize(s: String): String = if (s.length > Truncate) s.slice(0, Truncate) + "..." else s
 
-    override def toString: String = Seq("UnpackedResponse(",
-                                        s"status=${status},",
-                                        s"contentType=${ellipsize(contentType)},",
-                                        s"body=${ellipsize(body.toString)}",
-                                        s"headers=${headers}").mkString(" ")
+    override def toString: String = {
+      val fields = Seq(
+        s"status=${status}",
+        s"contentType=${ellipsize(contentType)}",
+        s"body=${ellipsize(body.toString)}",
+        s"headers=${headers}").mkString(", ")
+
+      s"UnpackedResponse(${fields})"
+    }
 
   }
 }
