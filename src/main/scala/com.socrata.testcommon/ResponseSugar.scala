@@ -37,6 +37,8 @@ object ResponseSugar extends ResponseSugar {
 
   class UnpackedResponse private[ResponseSugar] (val underlying: HttpServletResponse,
                                                  stream: mocks.util.CapturingServletOutputStream) {
+    private val Truncate = 24
+
     val status: Int = underlying.getStatus
     lazy val statusCode: Int = status
     lazy val contentType: String = underlying.getContentType
@@ -51,5 +53,18 @@ object ResponseSugar extends ResponseSugar {
         key -> underlying.getHeaders(key).asScala.toSeq
       }.toMap
     }
+
+    private def ellipsize(s: String): String = if (s.length > Truncate) s.slice(0, Truncate) + "..." else s
+
+    override def toString: String = {
+      val fields = Seq(
+        s"status=${status}",
+        s"contentType=${ellipsize(contentType)}",
+        s"body=${ellipsize(body.toString)}",
+        s"headers=${headers}").mkString(", ")
+
+      s"UnpackedResponse(${fields})"
+    }
+
   }
 }
