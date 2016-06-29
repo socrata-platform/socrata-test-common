@@ -106,7 +106,6 @@ information.
 After importing, simply compare two JSON strings with
 `actual shouldBeJson expected`.
 
-# A Simple Example
 JsonTest.scala:
 ```scala
 import com.socrata.testcommon.JsonUtils._
