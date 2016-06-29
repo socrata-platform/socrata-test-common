@@ -5,15 +5,6 @@ libraries).
 ## com.socrata.testcommon ##
 Generally applicable test code/patterns.
 
-### JsonUtils ###
-This object provides the `AssertionJSON` class and associated
-conversion, which together allow for quick and easy assertions on JSON
-strings. Failed assertions are supplemented with additional relevant
-information.
-
-After importing, simply compare two JSON strings with
-`actual shouldBeJson expected`.
-
 ### UnusedSugarCommon ###
 Mixing in this trait gives you access to a val named `Unused`, and a
 series of conversions to make `Unused` a substitute for most common
@@ -106,6 +97,16 @@ class VersionServiceTest extends TestBase with UnusedSugar {
 }
 ```
 
+### JsonUtils ###
+This object provides the `AssertionJSON` class and associated
+conversion, which together allow for quick and easy assertions on JSON
+strings. Failed assertions are supplemented with additional relevant
+information.
+
+After importing, simply compare two JSON strings with
+`actual shouldBeJson expected`.
+
+# A Simple Example
 JsonTest.scala:
 ```scala
 import com.socrata.testcommon.JsonUtils._
