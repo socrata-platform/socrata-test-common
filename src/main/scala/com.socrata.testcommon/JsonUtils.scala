@@ -22,6 +22,7 @@ object JsonUtils {
         "Textual expected:\n\n" + pretty(render(expectObj)) + "\n\n")
         { actualObj should be (expectObj) }
     }
+    def mustBeJson = shouldBeJson(_)
   }
   implicit def convertJsonAssertion(actual: => String): AssertionJson = new AssertionJson(actual)
 }
