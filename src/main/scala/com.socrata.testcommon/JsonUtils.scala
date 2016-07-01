@@ -12,10 +12,19 @@ object JsonUtils {
 
   class AssertionJson(actual: => String) {
     def shouldBeJson(expected: String) = {
-      val actualObj = Try(parse(actual)).recover({ case jpe: JsonParseException =>
-                  fail(s"""Unable to parse actual value "$actual" as JSON""", jpe)}).get
-      val expectObj = Try(parse(expected)).recover({ case jpe: JsonParseException =>
-                        fail(s"""Unable to parse expected value "$expected" as JSON""", jpe)}).get
+      val actualObj = try {
+        parse(actual)
+      } catch {
+        case jpe: JsonParseException =>
+          fail(s"""Unable to parse actual value "$actual" as JSON""", jpe)
+      }
+
+      val expectObj = try {
+        parse(expected)
+      } catch {
+        case jpe: JsonParseException =>
+          fail(s"""Unable to parse expected value "$expected" as JSON""", jpe)
+      }
 
       withClue(
         "\nTextual actual:\n\n" + pretty(render(actualObj)) + "\n\n\n" +
