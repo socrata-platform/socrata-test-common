@@ -3,15 +3,16 @@ package com.socrata.testcommon
 import com.fasterxml.jackson.core.JsonParseException
 import org.json4s._
 import org.json4s.jackson.JsonMethods.{parse, pretty, render}
+import org.scalatest.Assertion
 import org.scalatest.Matchers._
 
 import scala.util.Try
 
 object JsonUtils {
-  import scala.language.implicitConversions
+  import scala.language.implicitConversions // scalastyle:ignore
 
   class AssertionJson(actual: => String) {
-    def shouldBeJson(expected: String) = {
+    def shouldBeJson(expected: String): Assertion = {
       val actualObj = try {
         parse(actual)
       } catch {
@@ -31,7 +32,9 @@ object JsonUtils {
         "Textual expected:\n\n" + pretty(render(expectObj)) + "\n\n")
         { actualObj should be (expectObj) }
     }
-    def mustBeJson = shouldBeJson(_)
+
+    def mustBeJson(actual: => String): Assertion = shouldBeJson(actual)
   }
+
   implicit def convertJsonAssertion(actual: => String): AssertionJson = new AssertionJson(actual)
 }
