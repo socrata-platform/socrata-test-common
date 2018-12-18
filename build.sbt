@@ -1,4 +1,5 @@
 name := "socrata-test-common"
+organization := "com.socrata"
 
 resolvers ++= Seq("sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/",
                   "Socrata Cloudbees" at "https://repo.socrata.com/artifactory/libs-release")
