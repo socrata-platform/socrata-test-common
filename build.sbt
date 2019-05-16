@@ -1,8 +1,7 @@
 name := "socrata-test-common"
 organization := "com.socrata"
 
-resolvers ++= Seq("sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/",
-                  "Socrata Cloudbees" at "https://repo.socrata.com/artifactory/libs-release")
+resolvers ++= Seq("Socrata Artifactory" at "https://repo.socrata.com/artifactory/libs-release/")
 
 scalaVersion := "2.11.7"
 crossScalaVersions := Seq("2.10.4", scalaVersion.value)
