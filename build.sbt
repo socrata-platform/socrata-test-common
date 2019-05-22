@@ -1,7 +1,7 @@
 name := "socrata-test-common"
 organization := "com.socrata"
 
-resolvers ++= Seq("Socrata Artifactory" at "https://repo.socrata.com/artifactory/libs-release/")
+externalResolvers := Seq("Socrata Artifactory Libs Release" at "https://repo.socrata.com/artifactory/libs-release/")
 
 scalaVersion := "2.11.7"
 crossScalaVersions := Seq("2.10.4", scalaVersion.value)
